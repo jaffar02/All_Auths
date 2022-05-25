@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "99685508762",
+    "project_id": "mc-assignment-7761c",
+    "storage_bucket": "mc-assignment-7761c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99685508762:android:72f424ec5215296915e123",
+        "android_client_info": {
+          "package_name": "com.jaffar.mcassignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99685508762-45h17ncmk6f5chdctctdsaeavjtkdsk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-eXrD7ummRpNd5rBLxU_mqHyH78gXtjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99685508762-45h17ncmk6f5chdctctdsaeavjtkdsk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
