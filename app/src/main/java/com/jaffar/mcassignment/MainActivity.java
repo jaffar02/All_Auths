@@ -14,6 +14,13 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -37,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInOptions gso;
+    AdView ad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
         submit = findViewById(R.id.submit);
         db = new DaoClass();
         logout = findViewById(R.id.logoutBtn);
+        ad = findViewById(R.id.adView);
 
         setStateList();
+        loadAds();
 
         submit.setOnClickListener(v->{
             String firstName = fname.getText().toString().toLowerCase(Locale.ROOT);
@@ -143,6 +153,38 @@ public class MainActivity extends AppCompatActivity {
           }
         });
 
+        ad.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+                Toast.makeText(getApplicationContext(), "Ad clicked",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                Toast.makeText(getApplicationContext(), "Ad closed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Toast.makeText(getApplicationContext(), loadAdError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                Toast.makeText(getApplicationContext(), "Ad loaded",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+                Toast.makeText(getApplicationContext(), "Ad opened",Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
@@ -169,5 +211,15 @@ public class MainActivity extends AppCompatActivity {
        email.setText("");
        zipcode.setText("");
        phoneNum.setText("");
+    }
+
+    private void loadAds(){
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        ad.loadAd(adRequest);
     }
 }
